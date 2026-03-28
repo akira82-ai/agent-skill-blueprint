@@ -21,19 +21,19 @@ This is a comprehensive guide to Claude Skills development, a complete practical
 
 **查看 [chinese/](./chinese/) 目录获取完整内容**
 
-| 章节 | 标题 | 核心内容 |
-|------|------|---------|
-| **序言** | 认知觉醒 | 重新定义 Claude Skill |
-| **01** | 重新定义 Skill | 从 Prompt 到能力封装 |
-| **02** | 超越工具 | Skill 的产品化跃迁 |
-| **03** | 超越对话 | Skill 的 CLI 进化之路 |
-| **04** | 超越单文件 | Skill 的系统化架构 |
-| **05** | 超越孤立 | Skill 的能力网络革命 |
-| **06** | 超越执行者 | Skill 向 Agent 的进化 |
-| **07** | 超越能跑 | Skill 的专业化之路 |
-| **08** | 番外篇 | Skill 与 Plugin 的边界 |
-| **09** | 展望未来 | Skill 生态的下一个十年 |
-| **10** | 附录 | 参考资源 |
+| 文件 | 标题 |
+|------|------|
+| 00-序言-认知觉醒.md | 序言：认知觉醒 |
+| 01-重新定义Skill-从Prompt到能力封装.md | 重新定义 Skill：从 Prompt 到能力封装 |
+| 02-超越工具-Skill的产品化跃迁.md | 超越工具：Skill 的产品化跃迁 |
+| 03-超越对话-Skill的CLI进化之路.md | 超越对话：Skill 的 CLI 进化之路 |
+| 04-超越单文件-Skill的系统化架构.md | 超越单文件：Skill 的系统化架构 |
+| 05-超越孤立-Skill的能力网络革命.md | 超越孤立：Skill 的能力网络革命 |
+| 06-超越执行者-Skill向Agent的进化.md | 超越执行者：Skill 向 Agent 的进化 |
+| 07-超越能跑-Skill的专业化之路.md | 超越能跑：Skill 的专业化之路 |
+| 08-选择之道-Skill与Plugin的边界.md | 选择之道：Skill 与 Plugin 的边界 |
+| 09-展望未来-Skill生态的下一个十年.md | 展望未来：Skill 生态的下一个十年 |
+| 10-参考资源-深入探索的起点.md | 参考资源：深入探索的起点 |
 
 ### 🇺🇸 English Version
 
