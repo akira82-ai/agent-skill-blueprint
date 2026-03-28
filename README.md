@@ -37,7 +37,21 @@ This is a comprehensive guide to Claude Skills development, a complete practical
 
 ### 🇺🇸 English Version
 
-**Coming soon to [english/](./english/) directory**
+**See [english/](./english/) directory for complete content**
+
+| File | Title |
+|------|-------|
+| 00-Prologue-Cognitive-Awakening.md | Prologue: Cognitive Awakening |
+| 01-Redefining-Skill-From-Prompt-to-Capability-Encapsulation.md | Redefining Skill: From Prompt to Capability Encapsulation |
+| 02-Beyond-Tools-The-Productization-Leap-of-Skills.md | Beyond Tools: The Productization Leap of Skills |
+| 03-Beyond-Conversation-The-CLI-Evolution-Path-of-Skills.md | Beyond Conversation: The CLI Evolution Path of Skills |
+| 04-Beyond-Single-Files-The-Systematic-Architecture-of-Skills.md | Beyond Single Files: The Systematic Architecture of Skills |
+| 05-Beyond-Isolation-The-Capability-Network-Revolution.md | Beyond Isolation: The Capability Network Revolution |
+| 06-Beyond-Executors-The-Evolution-from-Skill-to-Agent.md | Beyond Executors: The Evolution from Skill to Agent |
+| 07-Beyond-It-Works-The-Professionalization-Path-of-Skills.md | Beyond "It Works": The Professionalization Path of Skills |
+| 08-The-Art-of-Choice-The-Boundary-Between-Skill-and-Plugin.md | The Art of Choice: The Boundary Between Skill and Plugin |
+| 09-Looking-Ahead-The-Next-Decade-of-the-Skill-Ecosystem.md | Looking Ahead: The Next Decade of the Skill Ecosystem |
+| 10-References-A-Starting-Point-for-Deeper-Exploration.md | References: A Starting Point for Deeper Exploration |
 
 ---
 
