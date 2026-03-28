@@ -1,29 +1,25 @@
-# Claude Skill 开发蓝皮书
+# Claude Skill 开发蓝皮书 Claude Skill Development Blueprint
 
 > 产品化·调用体系·Agent 编排
-
-**作者：磊叔**
-**微信：AIRay1015**
-**GitHub：[akira82-ai](https://github.com/akira82-ai)**
+> Productization · Invocation System · Agent Orchestration
 
 ---
 
-## 简介
+## 简介 / Introduction
+
+**中文版 | [English Version](#english-version)**
 
 这是一份关于 Claude Skills 开发的系统性指南，从产品化思维到 Agent 编排的完整实践手册。
 
-本书不是快速上手手册，而是对 Claude Skill 开发领域的深度思考和系统梳理。如果你希望：
-
-- 从"写 prompt"升级到"构建产品"
-- 让你的 Skill 从工具进化为 Agent
-- 掌握参数化、调用体系、任务编排等高级能力
-- 理解 Skills 生态的本质和未来方向
-
-那么这本书适合你。
+This is a comprehensive guide to Claude Skills development, a complete practical manual from productization thinking to Agent orchestration.
 
 ---
 
-## 目录
+## 目录 / Contents
+
+### 🇨🇳 中文版 | Chinese Version
+
+**查看 [chinese/](./chinese/) 目录获取完整内容**
 
 | 章节 | 标题 | 核心内容 |
 |------|------|---------|
@@ -39,9 +35,13 @@
 | **09** | 展望未来 | Skill 生态的下一个十年 |
 | **10** | 附录 | 参考资源 |
 
+### 🇺🇸 English Version
+
+**Coming soon to [english/](./english/) directory**
+
 ---
 
-## 特色
+## 特色 / Features
 
 - **产品化思维**：从技术实现到用户体验的完整视角
 - **实战案例**：file-organizer、insights-zh、idea-to-post 等真实项目
@@ -50,13 +50,14 @@
 
 ---
 
-## 如何使用
+## 如何使用 / How to Use
 
-### 在线阅读
+### 在线阅读 / Online Reading
 
 直接访问 GitHub 仓库，按章节阅读 markdown 文件。
+Visit the GitHub repository and read markdown files by chapter.
 
-### 本地阅读
+### 本地阅读 / Local Reading
 
 ```bash
 git clone https://github.com/akira82-ai/agent-skill-blueprint.git
@@ -64,31 +65,34 @@ cd agent-skill-blueprint
 ```
 
 然后使用你喜欢的 markdown 阅读器或 IDE 打开。
+Then use your favorite markdown reader or IDE to open.
 
-### 贡献
+### 贡献 / Contributing
 
 欢迎提交 Issue 和 Pull Request！
+Issues and Pull Requests are welcome!
 
 ---
 
-## 作者
+## 作者 / Author
 
-**磊叔**
-- 微信：AIRay1015
+**磊叔 | Leishu**
+- 微信 / WeChat：AIRay1015
 - GitHub：[akira82-ai](https://github.com/akira82-ai)
-- 开源项目：[file-organizer](https://github.com/akira82-ai/file-organizer) · [insights-zh](https://github.com/akira82-ai/insights-zh) · [idea-to-post](https://github.com/akira82-ai/idea-to-post)
+- 开源项目 / Projects：[file-organizer](https://github.com/akira82-ai/file-organizer) · [insights-zh](https://github.com/akira82-ai/insights-zh) · [idea-to-post](https://github.com/akira82-ai/idea-to-post)
 
 ---
 
-## 许可证
+## 许可证 / License
 
 [CC BY-NC-SA 4.0](LICENSE)
 
 ---
 
-## 致谢
+## 致谢 / Acknowledgments
 
 感谢 Claude Code 团队打造了如此强大的平台，感谢社区所有 Skill 开发者的探索和分享。
+Thanks to the Claude Code team for creating such a powerful platform, and to all Skill developers in the community for their exploration and sharing.
 
 ---
 
