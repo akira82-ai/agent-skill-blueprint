@@ -142,14 +142,14 @@ AskUserQuestion 的核心能力有三点：
 - 提供"输入新路径"选项
 
 **示例选项：**
-```
+
 - "/Users/xxx/Downloads"（最近使用）
 - "/Users/xxx/Desktop"（历史记录）
 - "下载文件夹"（~/Downloads）
 - "桌面"（~/Desktop）
 - "文档"（~/Documents）
 - "输入新路径"
-```
+
 
 ### 3. 确定目标目录（如未指定）
 
