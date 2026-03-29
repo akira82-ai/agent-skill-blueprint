@@ -48,7 +48,7 @@ When using AI to assist work in a team setting, a common problem is: different p
 
 Skills can solve this problem. By encapsulating best practices into Skills, everyone on the team follows the same processes and standards when using them. Whether it's document format, wording style, or processing steps, consistency is maintained. It's like equipping the team with a set of "standard operating procedures," making the results of AI-assisted work more controllable and professional.
 
-**The fourth dimension is沉淀 and reuse of privatized knowledge.**
+**The fourth dimension is sedimentation and reuse of privatized knowledge.**
 
 Many organizations or individuals have their own unique knowledge assets—such as internal company documentation standards, personal writing habits, industry-specific terminology, historically accumulated case libraries, and so on. This knowledge is scattered everywhere, and needs to be re-provided each time AI is used.
 
@@ -110,7 +110,7 @@ Claude Skills have two main storage locations: the global directory and the proj
 
 **The global directory** is located at `~/.claude/skills/`. This is the user-level Skill storage location; Skills installed here can be used in conversations for any project. General-purpose Skills you obtain from external sources—such as file organization tools, translation assistants, code generators, etc.—are typically installed here. The advantage of global Skills is "install once, use everywhere"—you don't need to repeatedly configure them in each project.
 
-**The project-local directory** is located at the project's `.claude/skills/`. This is the project-specific Skill storage location; only conversations in this project directory can use these Skills. Local Skills are suitable for storing tools related to specific projects—such as compliance checks for a specific codebase, documentation generators for specific teams, etc. The advantage of local Skills is tight binding with the project—they can reference files and configurations within the project, making them more precise and professional.
+**The project-local directory** is located in the project's `.claude/skills/`. This is the project-specific Skill storage location; only conversations in this project directory can use these Skills. Local Skills are suitable for storing tools related to specific projects—such as compliance checks for a specific codebase, documentation generators for specific teams, etc. The advantage of local Skills is tight binding with the project—they can reference files and configurations within the project, making them more precise and professional.
 
 In actual development, a common question is: where should I put the Skill while developing it? The answer is: anywhere convenient. During development, you can create the Skill in the current directory and test while modifying. After testing is complete, decide whether to install it globally or keep it locally. However, note that global and local Skills may have the same name—in this case, the local Skill takes priority—this is to prevent a project's special requirements from being overridden by a global Skill.
 

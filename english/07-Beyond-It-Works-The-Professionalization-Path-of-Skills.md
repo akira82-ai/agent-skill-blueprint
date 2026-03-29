@@ -10,7 +10,7 @@
 
 The first six chapters discussed the essence of Skills, product thinking, parameterized design, directory structure practice, invocation systems, and AutoSkill in action. These are all questions of "how to design and build a Skill." Now let's discuss the last question: **how to make a Skill go from "it works" to "professional."**
 
-What's the difference between "it works" and "professional"? "It works" means a Skill can complete expected functions, but may lack testing, have no version management, chaotic release methods. "Professional" means systematic testing methods, standardized version management, clear release processes. This transformation isn't icing on the cake, but the necessary path from "personal tool" to "public product."
+What's the difference between "it works" and "professional"? "It works" means a Skill can complete expected functions, but may lack testing, has no version management, chaotic release methods. "Professional" means systematic testing methods, standardized version management, clear release processes. This transformation isn't icing on the cake, but the necessary path from "personal tool" to "public product."
 
 ## Debugging: No Complex Tools Needed
 

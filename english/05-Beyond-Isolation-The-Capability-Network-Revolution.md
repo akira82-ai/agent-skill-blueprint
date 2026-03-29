@@ -198,7 +198,7 @@ The answer is yes, it really works.
 
 **Under traditional mode**, Skills execute all work themselves. They understand user intent, execute tasks, output results. Everything is under Skill's control.
 
-**Under new mode**, Skills are only responsible for planning and orchestration: they understand user intent, decompose into tasks, match required Skills, generate tasks, then—Skills exit. Remaining work is independently executed by tasks, Skills no longer participate.
+**Under new mode**, Skills are only responsible for planning and orchestration: they understand user intent, decompose into tasks, match required Skills, generate tasks, then—Skills exit. Remaining work is independently executed by tasks.
 
 ```
 ┌─────────────────────────────────────────────────┐

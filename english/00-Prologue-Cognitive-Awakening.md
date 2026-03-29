@@ -17,7 +17,7 @@ The core message this book wants to convey is: **Product Thinking.**
 
 Traditional AI development cognition often treats AI capabilities as a black box, focusing only on "how to call," while neglecting the true product experience. Claude Skills allow us to package AI capabilities into genuine products—with independent versions, clear boundaries, reusable value, that can be distributed to different users. This completely changes the game: you are no longer debugging prompts, but building a product entity that can be used by countless people and continuously iterated.
 
-The book is divided into seven parts: fundamentals, productization design, parameterized Skills, directory structure practice, invocation system, AutoSkill in action, and debugging, testing & release. There's also a bonus chapter comparing Skill vs Plugin vs MCP, as well as a conclusion and appendix.
+The book is divided into seven parts: fundamentals, productization design, parameterized Skills, directory structure practice, invocation system, AutoSkill in action, and debugging, testing & release. There's also a bonus chapter comparing Skill vs Plugin, as well as a conclusion and appendix.
 
 **Reading recommendations:**
 
@@ -40,15 +40,15 @@ March 2026, Guangzhou
 
 ## Table of Contents
 
-1. [Redefining Skill: From Prompt to Capability Encapsulation](#part-1-redefining-skill-from-prompt-to-capability-encapsulation)
-2. [Beyond Tools: The Productization Leap of Skills](#part-2-beyond-tools-the-productization-leap-of-skills)
-3. [Beyond Conversation: The CLI Evolution Path of Skills](#part-3-beyond-conversation-the-cli-evolution-path-of-skills)
-4. [Beyond Single Files: The Systematic Architecture of Skills](#part-4-beyond-single-files-the-systematic-architecture-of-skills)
-5. [Beyond Isolation: The Capability Network Revolution of Skills](#part-5-beyond-isolation-the-capability-network-revolution-of-skills)
-6. [Beyond Executors: The Evolution from Skill to Agent](#part-6-beyond-executors-the-evolution-from-skill-to-agent)
-7. [Beyond "It Works": The Professionalization Path of Skills](#part-7-beyond-it-works-the-professionalization-path-of-skills)
-8. [Bonus: The Art of Choice—The Boundary Between Skill and Plugin](#bonus-the-art-of-choice-the-boundary-between-skill-and-plugin)
-9. [Looking Ahead: The Next Decade of the Skill Ecosystem](#conclusion-looking-ahead-the-next-decade-of-the-skill-ecosystem)
-10. [References: A Starting Point for Deeper Exploration](#appendix-references-a-starting-point-for-deeper-exploration)
+1. [Redefining Skill: From Prompt to Capability Encapsulation](./01-Redefining-Skill-From-Prompt-to-Capability-Encapsulation.md)
+2. [Beyond Tools: The Productization Leap of Skills](./02-Beyond-Tools-The-Productization-Leap-of-Skills.md)
+3. [Beyond Conversation: The CLI Evolution Path of Skills](./03-Beyond-Conversation-The-CLI-Evolution-Path-of-Skills.md)
+4. [Beyond Single Files: The Systematic Architecture of Skills](./04-Beyond-Single-Files-The-Systematic-Architecture-of-Skills.md)
+5. [Beyond Isolation: The Capability Network Revolution of Skills](./05-Beyond-Isolation-The-Capability-Network-Revolution.md)
+6. [Beyond Executors: The Evolution from Skill to Agent](./06-Beyond-Executors-The-Evolution-from-Skill-to-Agent.md)
+7. [Beyond "It Works": The Professionalization Path of Skills](./07-Beyond-It-Works-The-Professionalization-Path-of-Skills.md)
+8. [Bonus: The Art of Choice—The Boundary Between Skill and Plugin](./08-The-Art-of-Choice-The-Boundary-Between-Skill-and-Plugin.md)
+9. [Looking Ahead: The Next Decade of the Skill Ecosystem](./09-Looking-Ahead-The-Next-Decade-of-the-Skill-Ecosystem.md)
+10. [References: A Starting Point for Deeper Exploration](./10-References-A-Starting-Point-for-Deeper-Exploration.md)
 
 ---

@@ -79,7 +79,6 @@ When the skill starts, first display the following welcome message to the user:
   🔍 Built-in Duplicate File Detection (MD5)
   ✨ Preview and Confirm Before Execution, Safe and Reliable
 ═══════════════════════════════════════════════════════════════
-```
 
 Skill started...
 ```
@@ -156,7 +155,7 @@ To facilitate memory, I've summarized the four core elements of products as foll
 ┌─────────────────────────────────────────────────┐
 │              Skill as Product                    │
 ├─────────────────────────────────────────────────┤
-│                                                  │
+│                                                  |
 │   ┌─────────┐  ┌─────────┐  ┌─────────┐         │
 │   │Encapsu- │  │Inde-    │  │Value    │         │
 │   │lation   │  │pendence │  │Proposi- │         │
@@ -164,12 +163,12 @@ To facilitate memory, I've summarized the four core elements of products as foll
 │   │Hide     │  │Clear    │  │Unique   │         │
 │   │Complex  │  │Bound-   │  │Value    │         │
 │   └─────────┘  └─────────┘  └─────────┘         │
-│                                                  │
+│                                                  |
 │   ┌───────────────────────────────────────┐     │
 │   │  Knowledge Sedimentation (Sustainable │     │
 │   │           Evolution Capability)       │     │
 │   └───────────────────────────────────────┘     │
-│                                                  │
+│                                                  |
 └─────────────────────────────────────────────────┘
 ```
 
@@ -315,7 +314,7 @@ To facilitate memory and review, I've summarized the four dimensions of producti
 │     Skill Productization Management Framework    │
 │            (Four Dimensions)                     │
 ├─────────────────────────────────────────────────┤
-│                                                 │
+│                                                 |
 │   ┌──────────────┐      ┌──────────────┐      │
 │   │   Brand      │      │   User       │      │
 │   │  Identity    │      │  Experience  │      │
@@ -323,7 +322,7 @@ To facilitate memory and review, I've summarized the four dimensions of producti
 │   │  • banner    │      │  • Progress  │      │
 │   │  • contact   │      │    feedback  │      │
 │   └──────────────┘      └──────────────┘      │
-│                                                 │
+│                                                 |
 │   ┌──────────────┐      ┌──────────────┐      │
 │   │   Version    │      │   Naming     │      │
 │   │  Management  │      │ Conventions  │      │
@@ -333,7 +332,7 @@ To facilitate memory and review, I've summarized the four dimensions of producti
 │   │  • Git Tags  │      │  • Clear     │      │
 │   │              │      │    descrip.  │      │
 │   └──────────────┘      └──────────────┘      │
-│                                                 │
+│                                                 |
 └─────────────────────────────────────────────────┘
 ```
 
