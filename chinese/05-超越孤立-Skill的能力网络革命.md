@@ -254,13 +254,10 @@ python3 scripts/manage_history.py read --type target
 使用批量翻译模式，在主会话中实时显示进度：
 
 1. **启动批量翻译**：
-   ```bash
    python3 ~/.claude/skills/insights-zh/scripts/auto_batch.py
-   ```
-
+   
 2. **查看进度和待翻译内容**：
    输出示例：
-   ```
    [██████░░░] 50.3% (140/309)
 
    待翻译批次：15 行
@@ -272,7 +269,6 @@ python3 scripts/manage_history.py read --type target
    4. Last 7 days
    5. Total conversations
    ...
-   ```
 
 3. **提供翻译**：
    - 翻译显示的 15 行内容
@@ -281,15 +277,11 @@ python3 scripts/manage_history.py read --type target
 
 4. **更新 TSV 文件**：
    使用以下命令更新翻译：
-   ```bash
    python3 ~/.claude/skills/insights-zh/scripts/auto_batch.py --update <start_idx> <trans1> <trans2> ...
-   ```
-
+   
 5. **重复步骤 1-4**，直到显示：
-   ```
    ✅ 所有行已翻译完成！
-   ```
-
+   
 6. **继续到步骤 3**：合并翻译结果
 ```
 
@@ -423,5 +415,3 @@ AskUserQuestion 让 Skill 具备了动态交互的能力，Task 机制让 Skill 
 想象一下未来的可能性：当你有一个包含上百个 Skills 的能力网络时，用户只需要表达一个模糊的意图，系统就能自动匹配最合适的 Skills 组合，动态生成执行方案，然后通过 Task 机制稳定执行。这已经不是"工具"的概念了，而是一个真正的"智能助理"。
 
 而这，才是 Claude Skills 的真正魅力所在。
-
----
