@@ -76,6 +76,83 @@ Parameterization brings an important question: How should this Skill be invoked?
 
 This distinction is important. When designing Skills, you first need to ask yourself: Does this Skill need parameters? If yes, you should expect users to invoke it through explicit slash commands.
 
+## Inline Invocation: Slash Commands Beyond Line Start
+
+The previous section discussed two invocation "methods"—explicit (slash command) and implicit (auto-trigger). But there's another often-overlooked question about invocation "position": does `/skill-name` have to be at the very beginning of the input?
+
+The answer is: no. Slash commands can appear anywhere in the input text.
+
+I first discovered this when I casually typed "Help me initialize, then run /github-smart-commit" during testing. The client UI immediately highlighted `/github-smart-commit`, indicating the system recognized it as a Skill invocation. This made me realize that slash command parsing is far more flexible than I'd assumed.
+
+### Client Parsing Mechanism
+
+Here's what Claude Code's client actually does when processing user input:
+
+1. **Scans the entire message**, not just the first line
+2. Finds the **first** `/skill-name` that matches a known Skill
+3. Expands that Skill's content into a `<command-name>` tag and injects it into the message
+4. The natural language text **before** `/skill-name` is preserved as context
+5. The text **after** `/skill-name` is passed as arguments to the Skill
+
+This means when a user inputs "Help me initialize, then run /github-smart-commit," Claude ultimately receives a combined prompt: the first half is natural language context ("Help me initialize, then run"), and the second half is the Skill's fully expanded instructions.
+
+This design is very practical. Users can embed Skill invocations within natural language, providing additional context and constraints for the Skill. For example, "First analyze the errors in this file, then /fix-issue"—the preceding natural language sets the execution premise for the Skill.
+
+```
+┌─────────────────────────────────────────────────┐
+│       Inline Slash Command Parsing Flow          │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│  User input:                                    │
+│  "Help me init, then run /github-smart-commit"  │
+│                        ↓                        │
+│  Client parsing:                                │
+│  1. Scan entire message                         │
+│  2. Find first matching /skill-name             │
+│  3. Expand Skill content ($ARGUMENTS replace)   │
+│  4. Prefix + expanded content → combined prompt │
+│                        ↓                        │
+│  Claude receives:                               │
+│  Natural language context +                     │
+│  <command-name>github-smart-commit              │
+│  </command-name> + Skill instructions           │
+│                                                 │
+└─────────────────────────────────────────────────┘
+```
+
+### Argument Passing Rules
+
+When there's text after `/skill-name`, that text is treated as the Skill's arguments. The passing rules are:
+
+- If the Skill's SKILL.md defines a `$ARGUMENTS` placeholder, the arguments **replace** that placeholder
+- If `$ARGUMENTS` is not defined, the arguments are **appended** to the end of the Skill content in the form `ARGUMENTS: <value>`
+
+A few concrete examples:
+
+| User Input | Arguments Skill Receives |
+|------------|-------------------------|
+| `Help me /github-smart-commit` | No extra arguments |
+| `Help me /github-smart-commit -m "test"` | `-m "test"` |
+| `/organize --source ~/Downloads --target ~/Docs` | `--source ~/Downloads --target ~/Docs` |
+
+Where do arguments end? **At the end of the message.** All text after `/skill-name` is treated as arguments, not just up to the next space.
+
+### Important Limitation: Single Command Rule
+
+There's an important limitation to be aware of. As confirmed by GitHub Issue [#25462](https://github.com/anthropics/claude-code/issues/25462):
+
+> Only the first `/skill-name` per message is processed. Subsequent `/xxx` tokens are treated as plain text arguments and will not be expanded as Skills.
+
+This means you **cannot** chain multiple Skill invocations in a single message. For example:
+
+```
+First /init then /commit
+```
+
+Only `/init` will be recognized and expanded; `then /commit` becomes part of `/init`'s arguments. If you need to execute multiple Skills, the correct approach is to send them as separate messages.
+
+This limitation is currently a platform design decision (the Issue status is Not Planned). Understanding it can help you avoid pitfalls.
+
 ## The Core Value of Parameterization: Separating Variable from Invariant
 
 What is the essence of parameterization? It is **separating fixed logic from variable input**.

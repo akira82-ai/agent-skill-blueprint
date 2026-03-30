@@ -307,6 +307,106 @@ What's the advantage of this design?
 
 **Strong fault tolerance.** If a translation sub-agent errors, it only affects the current batch. Main session can detect error, restart that batch's translation. Subsequent completed batches aren't affected.
 
+## Background Execution: From Synchronous to Asynchronous Orchestration
+
+The Task mechanism is powerful, but it has an implicit premise: **all execution is synchronous.** When a Skill starts a task, it either waits for the result to return, or continues executing subsequent steps itself. But if a step takes a long time—waiting for compilation to finish, waiting for user to authorize in a browser, waiting for a server to start up—synchronous waiting blocks the entire conversation, severely degrading user experience.
+
+Claude Code provides a mechanism that breaks through the synchronous limitation: Background Commands.
+
+### The run_in_background Mechanism
+
+The Bash tool has a `run_in_background` parameter. By default it's `false`, meaning commands execute synchronously and block until complete. When set to `true`, the command executes asynchronously in the background, immediately returns a task_id, and the main conversation isn't blocked.
+
+What does this mean? It means you can start a long-running operation, then continue chatting with Claude and doing other things. When that operation finishes, you'll receive a notification.
+
+```
+┌─────────────────────────────────────────────────┐
+│       Synchronous vs Background Execution        │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│  Synchronous (default):                         │
+│  User → Start command → [████blocking wait████] │
+│                          ↓                      │
+│                     Return result               │
+│                                                 │
+│  Background (run_in_background: true):           │
+│  User → Start command → Return task_id          │
+│       │                                         │
+│       ├── Continue normal chat ← User can do    │
+│       │   other things simultaneously           │
+│       │                                         │
+│       └── ... background command running ...    │
+│                          ↓                      │
+│              Auto receive completion notice     │
+│                                                 │
+└─────────────────────────────────────────────────┘
+```
+
+### Completion Notification Mechanism
+
+When a background command finishes, the system automatically injects a notification message into the conversation. You don't need to poll or manually check—the system proactively pushes it to you.
+
+The notification includes the command name and exit code:
+- `exit code 0` means success
+- Non-zero exit code means failure
+
+After Claude sees this notification, it can decide on the next action based on the context from earlier in the conversation. This is the most interesting capability of background commands—**chained task triggering**.
+
+### Chained Task Triggering
+
+Imagine you instruct Claude like this: "After the background compilation finishes, automatically run tests."
+
+The flow works like this:
+1. Claude starts compilation (`run_in_background: true`), continues chatting with you
+2. Compilation runs in the background while you do other things
+3. Compilation completes, system injects notification: `Background command "..." completed (exit code 0)`
+4. Claude sees the notification, recalls you said "run tests after compilation finishes," and automatically starts the tests
+
+This pattern is essentially **LLM-driven event response**. It's not a traditional webhook or event listener—there's no standalone trigger mechanism. Instead, it relies on the LLM "reading" the notification message in the next conversation turn and taking action based on context.
+
+### Real Case: Feishu OAuth Authorization
+
+My own lark series Skills use this mechanism. Feishu OAuth authorization requires the user to complete a login operation in the browser—a classic long-running, user-involved process.
+
+With synchronous execution, the user would be stuck waiting, the entire conversation blocked. But with background commands:
+1. Skill initiates Feishu OAuth authorization, command runs in background
+2. Skill prompts user: "Please open the link in your browser to complete authorization"
+3. User goes to the browser while continuing to work in Claude Code
+4. After authorization completes, background command detects this and exits automatically (exit code 0)
+5. Claude Code receives completion notification, Skill continues subsequent flow
+
+This experience feels very natural—the user isn't locked into a waiting state.
+
+### Limitations
+
+Every mechanism has its costs, and background commands are no exception. To be honest, there are several limitations to be aware of:
+
+**Context window dependency.** If the conversation grows too long and gets compressed before the background task finishes, Claude may lose the original instruction (like "run tests after compilation"), and won't automatically trigger the next step.
+
+**Session survival dependency.** If the Claude Code session exits, no one is left to pick up the background command's result. It's not an independent process—its lifecycle is bound to the session.
+
+**Not a webhook.** There's no standalone event trigger, making it less reliable than traditional event-driven architectures. If Claude is busy with something else or doesn't correctly understand the notification's context, it may not take the expected action.
+
+**Permission control.** Background commands still require user authorization before execution—they don't bypass security checks.
+
+### Alternative Approach Comparison
+
+Depending on different use cases, Claude Code offers multiple asynchronous/scheduled execution approaches:
+
+| Approach | Mechanism | Persistence | Best For |
+|----------|-----------|-------------|----------|
+| **run_in_background** | Async execution, auto-notify | Session-scoped | Waiting for compilation, authorization, etc. |
+| **&& chaining** | Sequential execution in single command | Immediate | build && test && deploy |
+| **CronCreate** | Scheduled tasks (persistable) | Session / Durable | Periodic checks, recurring tasks |
+| **/loop + Skill** | Periodically re-execute a Skill | Session (3-day expiry) | Monitoring, polling |
+| **Hooks** | Event hooks in settings.json | Persistent | Event-triggered automation |
+
+Selection advice is simple: **use what's sufficient.** For waiting on a short task, use `run_in_background`; for periodic execution, use `/loop` or CronCreate; for cross-session persistence, use Hooks or Durable Cron. Don't use something just because you can—choose the simplest approach that works.
+
+### Relationship with the Three-Level Invocation System
+
+Background execution doesn't change the three-level invocation system we discussed earlier—it adds an "asynchronous variant" at the Task level. The Task mechanism focuses on **"decomposition and orchestration"**—breaking complex tasks into smaller ones and executing them in parallel. Background execution focuses on **"waiting and responding"**—letting time-consuming tasks proceed without blocking the main flow, then automatically picking up when they finish. The two complement each other, making Skills' orchestration capabilities more complete.
+
 ## Skill Calling Skill: Implicit Invocation System
 
 The third level is Skills calling each other. This is the most easily overlooked but most interesting capability.

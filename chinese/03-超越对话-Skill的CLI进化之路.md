@@ -76,6 +76,83 @@ Claude Code 支持两种参数格式，你可以根据习惯选择。
 
 这个区分很重要。设计 Skill 时，你需要先问自己：这个 Skill 需要参数吗？如果需要，就应该预期用户通过显性的斜杠命令来调用它。
 
+## 内联调用：Slash Command 不限于行首
+
+前面讨论了两种调用"方式"——显性（斜杠命令）和隐性（自动触发）。但还有一种容易被忽略的调用"位置"问题：`/skill-name` 一定要放在输入的最前面吗？
+
+答案是：不需要。Slash Command 可以出现在输入文本的任意位置。
+
+我第一次发现这一点时，是在测试中随手输入了一句"帮我初始化，然后运行 /github-smart-commit"。结果客户端 UI 立刻高亮了 `/github-smart-commit` 部分，说明系统识别到了这是一个 Skill 调用。这让我意识到，Slash Command 的解析远比我以为的灵活。
+
+### 客户端解析机制
+
+Claude Code 客户端在处理用户输入时，实际行为是这样的：
+
+1. **扫描整条消息**，而非只看行首
+2. 找到**第一个**匹配已知 Skill 的 `/skill-name`
+3. 将该 Skill 的内容展开为 `<command-name>` 标签注入消息
+4. `/skill-name` **前面**的自然语言文本保留，作为上下文
+5. `/skill-name` **后面**的文本作为参数传递给 Skill
+
+这意味着，当用户输入 `帮我初始化，然后运行 /github-smart-commit` 时，Claude 最终收到的是一个组合 prompt：前半部分是自然语言上下文（"帮我初始化，然后运行"），后半部分是 Skill 展开后的完整指令。
+
+这种设计非常实用。用户可以在自然语言中嵌入 Skill 调用，为 Skill 提供额外的上下文和约束。比如 `先分析这个文件的错误，然后 /fix-issue`，前面的自然语言为 Skill 设定了执行前提。
+
+```
+┌─────────────────────────────────────────────────┐
+│           内联 Slash Command 解析流程            │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│  用户输入:                                      │
+│  "帮我初始化，然后运行 /github-smart-commit"     │
+│                        ↓                        │
+│  客户端解析:                                    │
+│  1. 扫描整条消息                                │
+│  2. 找到第一个匹配的 /skill-name                │
+│  3. 展开 Skill 内容（$ARGUMENTS 替换等）        │
+│  4. 前文 + 展开内容 → 组合 prompt               │
+│                        ↓                        │
+│  Claude 收到:                                   │
+│  自然语言上下文 +                                │
+│  <command-name>github-smart-commit              │
+│  </command-name> + Skill 指令                   │
+│                                                 │
+└─────────────────────────────────────────────────┘
+```
+
+### 参数传递规则
+
+当 `/skill-name` 后面还有文本时，这些文本会被当作 Skill 的参数。参数传递的规则是：
+
+- 如果 Skill 的 SKILL.md 中定义了 `$ARGUMENTS` 占位符，参数会**替换**该占位符
+- 如果没有定义 `$ARGUMENTS`，参数会以 `ARGUMENTS: <value>` 的形式**追加**到 Skill 内容末尾
+
+几个具体示例：
+
+| 用户输入 | Skill 收到的参数 |
+|---------|----------------|
+| `帮我 /github-smart-commit` | 无额外参数 |
+| `帮我 /github-smart-commit -m "test"` | `-m "test"` |
+| `/organize --source ~/Downloads --target ~/Docs` | `--source ~/Downloads --target ~/Docs` |
+
+参数的边界在哪里？**到消息末尾为止。** `/skill-name` 之后的所有文本都会作为参数，而不是只到下一个空格。
+
+### 重要限制：单 Command 规则
+
+这里有一个重要的限制需要了解。根据 GitHub Issue [#25462](https://github.com/anthropics/claude-code/issues/25462) 的确认：
+
+> 每条消息只处理第一个 `/skill-name`。后续的 `/xxx` 会被视为纯文本参数，不会作为 Skill 展开。
+
+这意味着你**不能**在一条消息中链式调用多个 Skill。比如：
+
+```
+先 /init 再 /commit
+```
+
+只有 `/init` 会被识别并展开，`再 /commit` 会变成 `/init` 的参数的一部分。如果你需要执行多个 Skill，正确的做法是分多条消息发送。
+
+这个限制目前是平台的设计决策（该 Issue 状态为 Not Planned），了解它可以帮助你避免踩坑。
+
 ## 参数化的核心价值：分离变与不变
 
 参数化的本质是什么？是**分离固定逻辑和可变输入**。
